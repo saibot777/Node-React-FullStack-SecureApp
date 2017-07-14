@@ -59,7 +59,7 @@ export default {
                 test: /\.js$/,
                 include: [path.join(__dirname, "shared"), path.join(__dirname, "src")],
                 loader: "babel",
-                query: BABEL_QUERY
+                query: BABEL_QUERY,
             },
             {
                 test: /(\.css)$/,

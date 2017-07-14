@@ -59,10 +59,13 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true,
+        match: /(?=.*[a-zA-Z])(?=.*[0-9]+).*/,
+        minlength: 12
     },
     email: {
         type: String,
         require: true,
+        match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
     },
     created: {
         type: Date,

@@ -20,4 +20,5 @@ export default (
         </Route>
         <Route path="*" component={NotFoundPage}/>
     </Route>
+
 );

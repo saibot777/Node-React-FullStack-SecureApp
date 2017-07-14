@@ -823,7 +823,7 @@ export default [
         start: "07-27-2009",
         end: "07-27-2009",
         timelineEvents: [],
-        details: "About 131,000 former and current Army Guard members potentially affected  when a personal laptop owned by an Army Guard contractor was stolen. Database incuded names, Social Security Numbers, incentive payment amounts and payment dates.",
+        details: "About 131,000 former and current Army Guard members potentially affected  when a personal laptop owned by an Army Guard contractor was stolen. Database included names, Social Security Numbers, incentive payment amounts and payment dates.",
         records: 131000,
         breachType: "lost / stolen computer",
         sources: [

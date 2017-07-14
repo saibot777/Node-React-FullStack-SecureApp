@@ -21,9 +21,6 @@ export default function sessionManagementConfig(app){
         resave: false,
         cookie: {
             path: "/",
-            httpOnly: false,
-            secure: false
-        },
-
+        }
     }));
 }

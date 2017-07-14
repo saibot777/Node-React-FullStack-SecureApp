@@ -78,12 +78,12 @@ function userRegistrationSuccess(message) {
     }
 }
 
-function userRegistrationFailure(errorMessage){
+function userRegistrationFailure(errors){
     return {
         type: types.REGISTRATION_FAILURE,
         isRequested: false,
         isRegistered: false,
-        errorMessage
+        errors
     }
 }
 
@@ -129,8 +129,8 @@ export function register(user){
                 dispatch(userRegistrationSuccess(message));
                 dispatch(routerActions.push("/login"));
             })
-            .catch(function(errorMessage) {
-                dispatch(userRegistrationFailure(errorMessage));
+            .catch(function(errors) {
+                dispatch(userRegistrationFailure(errors));
             });
     }
 }

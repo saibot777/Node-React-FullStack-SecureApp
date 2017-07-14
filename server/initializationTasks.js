@@ -1,21 +1,13 @@
 "use strict";
-/* eslint-disable no-console */
-
-import {
-    getTimelineItemModel,
-    getUserModel,
-    getEventVoteModel}          from "./data_access/modelFactory";
-import timelineItems            from "./data/timelineItems-seed";
+import {getTimelineItemModel, getUserModel, getEventVoteModel} from "./data_access/modelFactory";
+import timelineItems           from "./data/timelineItems-seed";
 import Promise                  from "bluebird";
-import colors                   from "colors";
 
 const fs = Promise.promisifyAll(require("fs"));
 
 export const initialize = async() => {
     try {
-        console.log(colors.yellow("Seeding Timeline Items."));
         await seedTimelineEvents();
-        console.log(colors.yellow("Seeding Users and Votes."));
         return await seedUsersAndVotes();
     } catch (err) {
         throw err;

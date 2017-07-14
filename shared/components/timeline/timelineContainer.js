@@ -117,7 +117,7 @@ class TimelineContainer extends React.Component {
 
             const secondaryDetails = item.group == "breach"
                 ? `Type: ${item.breachType}`
-                : `Targets: ${item.targets.substring(0, 35)}`;
+                : `Targets: ${item.targets}`;
 
             item.className = "timeline-event";
             item.title = `${item.details[0].substring(0, 35)}...`;
@@ -207,7 +207,10 @@ class TimelineContainer extends React.Component {
 }
 
 Timeline.propTypes = {
-    timelineItems: PropTypes.array.isRequired
+    timelineItems: PropTypes.array.isRequired,
+    user: PropTypes.object,
+    votes: PropTypes.array,
+    filterCriteria: PropTypes.object
 };
 
 function mapStateToProps(state) {

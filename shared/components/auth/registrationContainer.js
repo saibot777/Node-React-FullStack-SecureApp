@@ -21,10 +21,11 @@ class Registration extends Component {
 
     render() {
         const {registration, errors} = this.props;
+
         return (
             <RegistrationForm
                 registration={registration}
-                errors={errors}
+                errors={errors.data}
                 onSubmit={this.register}
             />
         )

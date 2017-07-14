@@ -13,8 +13,8 @@ import webpackConfig                from "../webpack.config.dev.js";
 import open                         from "open";
 import path                         from "path";
 import React                        from "react";
+import expressValidator             from "express-validator";
 
-const host = "localhost";
 const port = 7000;
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -22,9 +22,10 @@ const compiler = webpack(webpackConfig);
 sessionManagementConfig(app);
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(bodyParser.json());
-app.use("/fonts/", express.static(path.join(__dirname, "./shared/assets/fonts")));
 
+app.use("/fonts/", express.static(path.join(__dirname, "./shared/assets/fonts")));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
@@ -53,8 +54,8 @@ initialize()
             if (err) {
                 console.log(err);
             } else {
-                console.log(`Express server listening at http://${host}:${port}`);
-                open(`http://${host}:${port}`);
+                console.log(`Express server listening at http://localhost:${port}`);
+                open(`http://localhost:${port}`);
             }
         });
 })

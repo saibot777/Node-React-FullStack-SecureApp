@@ -1,18 +1,17 @@
 "use strict";
 
-import React, {Component, PropTypes}            from 'react';
+import React, {Component, PropTypes}            from "react";
 import {Link}                                   from "react-router";
-import {Field, reduxForm}                       from 'redux-form';
-
+import {Field, reduxForm}                       from "redux-form";
 
 const validate = values => {
     const errors = {};
+
     if (!values.email) {
         errors.email = "Required"
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
         errors.email = "Invalid email address";
     }
-
     if (!values.password) {
         errors.password = "Required";
     } else if (values.confirmPassword && (values.confirmPassword != values.password)) {
@@ -57,7 +56,7 @@ class RenderField extends Component {
     }
 }
 
-const RegistrationForm = ({handleSubmit, onSubmit}) => {
+const RegistrationForm = ({handleSubmit, onSubmit, errors}) => {
 
     return (
         <div className="register">
@@ -83,7 +82,12 @@ const RegistrationForm = ({handleSubmit, onSubmit}) => {
                            placeholder="Confirm Password (required)" className="form-control" label="Confirm Password"
                            tabIndex="5"
                     />
+                    {errors &&
+                        errors.map((error, i) => {
+                            return <div key={i} className="error"><span>{error.msg}</span></div>
+                        })
 
+                    }
                     <button className="btn btn-primary" tabIndex="6">Register</button>
                 </form>
                 <div className="register_sign-in">
@@ -92,6 +96,12 @@ const RegistrationForm = ({handleSubmit, onSubmit}) => {
             </div>
         </div>
     )
+};
+
+RegistrationForm.propTypes = {
+    errors: PropTypes.array,
+    handleSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
 };
 
 

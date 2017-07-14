@@ -21,7 +21,7 @@ export default function registrationReducer(state = registrationState, action) {
             return Object.assign({}, state, {
                 isRequested: false,
                 isRegistered: false,
-                errorMessage: action.errorMessage
+                errors: action.errors
             });
         default:
             return state;
