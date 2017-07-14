@@ -2,6 +2,7 @@
 
 import mongoose         from "mongoose";
 import Promise          from "bluebird";
+// import bcrypt           from "bcrypt";
 
 const Schema = mongoose.Schema;
 
@@ -70,11 +71,40 @@ const UserSchema = new Schema({
     }
 });
 
+// Bcrypt Way
+// UserSchema.pre("save", function (next) {
+//     if (!this.isModified("password")) {
+//         return next();
+//     }
+
+//     bcrypt.hash(this.password, 16.5, (err, hash) => {
+//         if (err) {
+//             next(err);
+//             return;
+//         }
+
+//         this.password = hash;
+//         next();
+//     });
+// });
+
 UserSchema.methods.passwordIsValid = function (password, callback) {
     const results = !this.password || !password
         ? false
         : this.password == password;
     callback(null, results);
 };
+
+// Bcrypt Way
+// UserSchema.methods.passwordIsValid = function(password, callback) {
+//     bcrypt.compare(password, this.password, function() {
+//         if (err) {
+//             callback(false);
+//             return
+//         }
+
+//         callback(null, results);
+//     })
+// };
 
 export {UserSchema as UserSchema};
