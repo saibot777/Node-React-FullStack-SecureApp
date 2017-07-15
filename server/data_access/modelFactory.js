@@ -30,3 +30,12 @@ export const getEventVoteModel = async function() {
         throw err;
     }
 };
+
+export const getLoginsModel = async function() {
+    try {
+        const conn = await connectionProvider(serverSettings.serverUrl, serverSettings.database);
+        return conn.model("Logins", LoginsSchema);
+    } catch(err) {
+        throw err;
+    }
+};

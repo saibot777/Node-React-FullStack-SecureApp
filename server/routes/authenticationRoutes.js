@@ -66,13 +66,18 @@ authenticationRouter.route("/api/user/register")
 
 authenticationRouter.route("/api/user/login")
     .post(cors(), async function (req, res) {
+        const delayResponse = response => {
+            setTimeout(() => {
+                response();
+            }, 1000)
+        };
         try {
             const User = await getUserModel();
             const {email, password} = req.body;
 
             const existingUser = await User.findOne({username: email}).exec();
 
-            if (existingUser && await existingUser.passwordIsValid(password)) {
+            if (!errors && existingUser && await existingUser.passwordIsValid(password)) {
                 const userInfo = {
                     _id: existingUser._id,
                     firstName: existingUser.firstName,
@@ -82,18 +87,17 @@ authenticationRouter.route("/api/user/login")
 
                 req.session.login(userInfo);
 
-                res.status(200).json({
+                return delayResponse(() => res.status(200).json({
                     firstName: existingUser.firstName,
                     lastName: existingUser.lastName,
                     username: existingUser.email
-                });
+                }));
             } else {
-                res.status(401).send("Invalid username or password");
+                return delayResponse(() => res.status(401).send("Invalid username or password"));
             }
         }
         catch (err) {
-            console.log(err);
-            res.status(500).send("There was an error attempting to login. Please try again later.");
+            return delayResponse(() => res.status(500).send("There was an error attempting to login. Please try again later."));
         }
     });
 
